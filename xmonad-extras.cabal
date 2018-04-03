@@ -41,8 +41,8 @@ flag testing
   default: False
 
 library
-
     build-depends:      base < 5, mtl, containers, X11>=1.4.3, xmonad>=0.10 && <0.14, xmonad-contrib>=0.10 && <0.14
+    build-depends:      filepath >= 1.3
     ghc-options:        -fwarn-tabs -Wall -fno-warn-unused-do-bind
 
     -- Upload blocked by this: https://github.com/haskell/cabal/issues/2527

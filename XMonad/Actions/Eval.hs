@@ -29,6 +29,7 @@ import XMonad.Core
 import XMonad.Util.Run
 import Language.Haskell.Interpreter
 import Data.List
+import System.FilePath ((</>))
 
 -- $usage
 -- This module provides functions to evaluate haskell expressions at runtime
@@ -81,6 +82,9 @@ handleErrorDefault err = io (safeSpawn "/usr/bin/xmessage" [replace (show err) "
 -- | Returns an Interpreter action that loads the desired modules and interprets the expression.
 interpret' :: EvalConfig -> String -> Interpreter (X String)
 interpret' conf s = do
+  sp <- get searchPath
+  xmd <- getXMonadDir
+  set [ searchPath := ((xmd </> "lib"):sp) ]
   loadModules $ modules conf
   setTopLevelModules =<< getLoadedModules
   setImportsQ $ imports conf
